@@ -77,6 +77,7 @@ class MainViewModel @Inject constructor(
 }
 
  */
+//app b pagination khedama
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val githubRepository: GithubRepository
@@ -113,3 +114,37 @@ class MainViewModel @Inject constructor(
         }
     }
 }
+
+
+/*@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val repository: GithubRepository
+) : ViewModel() {
+
+    private val _state = MutableStateFlow<UiState<List<Repository>>>(UiState.Loading)
+    val state: StateFlow<UiState<List<Repository>>> = _state
+
+    private val currentItems = mutableListOf<Repository>()
+    private var currentPage = 1
+    private var isLoading = false
+
+    fun fetchNextPage() {
+        if (isLoading) return
+
+        viewModelScope.launch {
+            isLoading = true
+            try {
+                val repos = repository.getRepositories(currentPage)
+                currentItems.addAll(repos)
+                _state.value = UiState.Success(currentItems.toList())
+                currentPage++
+            } catch (e: Exception) {
+                _state.value = UiState.Error(e.message ?: "Erreur inconnue")
+            } finally {
+                isLoading = false
+            }
+        }
+    }
+}
+
+ */

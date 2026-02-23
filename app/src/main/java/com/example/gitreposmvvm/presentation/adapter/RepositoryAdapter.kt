@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.example.gitreposmvvm.R
 import com.example.gitreposmvvm.domain.model.Repository
 
+// app avec pagination ca marche
+
 class RepositoryAdapter(
     private val items: List<Repository>
 ) : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder>() {
@@ -41,3 +43,5 @@ class RepositoryAdapter(
 
     override fun getItemCount(): Int = items.size
 }
+
+
