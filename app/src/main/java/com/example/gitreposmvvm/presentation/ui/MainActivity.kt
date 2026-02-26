@@ -74,7 +74,7 @@ fun GreetingPreview() {
 }
 
  */
-package com.example.gitreposmvvm.presentation.ui
+/*package com.example.gitreposmvvm.presentation.ui
 
 import android.os.Bundle
 import android.view.View
@@ -95,50 +95,7 @@ import com.example.gitreposmvvm.presentation.state.UiState
 import com.example.gitreposmvvm.presentation.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-/*
-@AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-    private val viewModel: MainViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        // Appel API
-        viewModel.fetchRepositories(1)
-
-        // Observer le StateFlow
-        lifecycleScope.launch {
-            viewModel.state.collect { state ->
-                when (state) {
-
-                    is UiState.Loading -> {
-                        binding.textView.text = "Loading..."
-                    }
-
-                    is UiState.Success -> {
-                        val repos: List<Repository> = state.data
-
-                        binding.textView.text =
-                            repos.joinToString("\n\n") { repo ->
-                                repo.name
-                            }
-                    }
-
-                    is UiState.Error -> {
-                        binding.textView.text = state.message
-                    }
-                }
-            }
-        }
-    }
-}
-
- */
 // app avec pagination ca marche bien
 
 @AndroidEntryPoint
@@ -200,3 +157,46 @@ class MainActivity : AppCompatActivity() {
 }
 
 
+ */
+
+package com.example.gitreposmvvm.presentation.ui
+
+import android.os.Bundle
+import android.view.View
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.gitreposmvvm.databinding.ActivityMainBinding
+import com.example.gitreposmvvm.presentation.adapter.RepositoryAdapter
+import com.example.gitreposmvvm.presentation.adapter.RepositoryPagingAdapter
+import com.example.gitreposmvvm.presentation.state.UiState
+import com.example.gitreposmvvm.presentation.viewmodel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    private val viewModel: MainViewModel by viewModels()
+    private lateinit var adapter: RepositoryPagingAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        adapter = RepositoryPagingAdapter()
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = adapter
+
+        lifecycleScope.launch {
+            viewModel.repositories.collect {
+                adapter.submitData(it)
+            }
+        }
+    }
+}

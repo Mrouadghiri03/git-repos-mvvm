@@ -1,6 +1,6 @@
 package com.example.gitreposmvvm.di
 
-
+import com.example.gitreposmvvm.data.paging.GithubPagingSource
 import com.example.gitreposmvvm.data.remote.ApiService
 import com.example.gitreposmvvm.data.repository.GithubRepositoryImpl
 import com.example.gitreposmvvm.domain.repository.GithubRepository

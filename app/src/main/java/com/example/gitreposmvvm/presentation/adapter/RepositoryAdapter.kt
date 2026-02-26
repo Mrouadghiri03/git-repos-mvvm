@@ -1,4 +1,4 @@
-package com.example.gitreposmvvm.presentation.adapter
+/*package com.example.gitreposmvvm.presentation.adapter
 
 
 import android.view.LayoutInflater
@@ -44,4 +44,49 @@ class RepositoryAdapter(
     override fun getItemCount(): Int = items.size
 }
 
+ */
 
+package com.example.gitreposmvvm.presentation.adapter
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.gitreposmvvm.databinding.ItemRepositoryBinding
+import com.example.gitreposmvvm.domain.model.Repository
+
+class RepositoryAdapter(
+    private val items: List<Repository>
+) : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder>() {
+
+    inner class RepositoryViewHolder(
+        private val binding: ItemRepositoryBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(repo: Repository) {
+            binding.name.text = repo.name
+            binding.author.text = "Author: ${repo.owner}"
+            binding.stars.text = "⭐ ${repo.stars}"
+
+            Glide.with(binding.avatar.context)
+                .load(repo.avatarUrl)
+                .circleCrop()
+                .into(binding.avatar)
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
+        val binding = ItemRepositoryBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return RepositoryViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: RepositoryViewHolder, position: Int) {
+        holder.bind(items[position])
+    }
+
+    override fun getItemCount(): Int = items.size
+}

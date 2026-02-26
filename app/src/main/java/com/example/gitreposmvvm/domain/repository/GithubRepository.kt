@@ -4,6 +4,10 @@ package com.example.gitreposmvvm.domain.repository
 import com.example.gitreposmvvm.domain.model.Repository
 
 
+
+import androidx.paging.PagingData
+import kotlinx.coroutines.flow.Flow
+
 interface GithubRepository {
-    suspend fun getRepositories(page : Int): List<Repository>
+    fun getRepositories(): Flow<PagingData<Repository>>
 }

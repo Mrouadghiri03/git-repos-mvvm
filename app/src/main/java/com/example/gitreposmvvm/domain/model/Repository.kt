@@ -1,6 +1,5 @@
 package com.example.gitreposmvvm.domain.model
 
-import com.example.gitreposmvvm.data.model.Owner
 
 
 data class Repository(
