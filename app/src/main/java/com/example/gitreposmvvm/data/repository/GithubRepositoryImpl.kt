@@ -14,16 +14,14 @@ class GithubRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : GithubRepository {
 
-    override fun getRepositories(): Flow<PagingData<Repository>> {
-
+    override fun getRepositories(page: Int): Flow<PagingData<Repository>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 30,
-                enablePlaceholders = false
+                enablePlaceholders = false,
+                initialLoadSize = 30
             ),
-            pagingSourceFactory = {
-                GithubPagingSource(apiService)
-            }
+            pagingSourceFactory = { GithubPagingSource(apiService, page) }
         ).flow
     }
 }

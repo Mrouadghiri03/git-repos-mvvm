@@ -9,5 +9,5 @@ import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 
 interface GithubRepository {
-    fun getRepositories(): Flow<PagingData<Repository>>
+    fun getRepositories(page : Int): Flow<PagingData<Repository>>
 }

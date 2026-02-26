@@ -87,4 +87,6 @@ dependencies {
 
     //paging 3 pour la pagination
     implementation ("androidx.paging:paging-runtime-ktx:3.2.1")
+
+    implementation("io.coil-kt:coil:2.4.0")
 }

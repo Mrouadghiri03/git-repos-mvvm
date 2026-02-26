@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetRepositoriesUseCase @Inject constructor(
     private val repository: GithubRepository
 ) {
-    operator fun invoke(): Flow<PagingData<Repository>> {
-        return repository.getRepositories()
+    operator fun invoke(page : Int): Flow<PagingData<Repository>> {
+        return repository.getRepositories(page)
     }
 }
