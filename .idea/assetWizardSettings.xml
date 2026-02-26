@@ -292,9 +292,24 @@
                   <entry key="vectorAssetStep">
                     <value>
                       <PersistentState>
+                        <option name="children">
+                          <map>
+                            <entry key="clipartAsset">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/arrow_circle_left/baseline_arrow_circle_left_24.xml" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_placeholder_user" />
+                            <entry key="outputName" value="ic_arrow_back" />
                             <entry key="sourceFile" value="C:\Users\Marouan\Desktop\mobile\GitReposMVVM" />
                           </map>
                         </option>
