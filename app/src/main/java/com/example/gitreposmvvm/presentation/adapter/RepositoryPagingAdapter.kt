@@ -44,6 +44,9 @@ class RepositoryPagingAdapter :
                 // Nombre d'étoiles formaté
                 stars.text = formatStars(repo.stars)
 
+                //description
+                description.text=repo.description
+
                 // Chargement de l'avatar avec Coil
                 avatar.load(repo.avatarUrl) {
                     crossfade(true)
